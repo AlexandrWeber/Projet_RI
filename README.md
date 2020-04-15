@@ -1,0 +1,72 @@
+# Projet_RI
+Projet final
+14/04/2020
+Maryna STETSENKO
+Alexander IVANOV
+
+INTRODUCTION
+Dans ce document nous vous présentons notre projet final du second semestre pour le cours de recherche d'information (partie pratique). Le but de ce projet est de procéder aux réalisations suivantes :
+
+1. Indexation incrémentale bilingue
+2. Requête/interrogation booléenne par mots-clés
+
+La première partie consiste en la création de deux index :
+    • Index inversé (sous forme d'un dictionnaire de termes lesquels à son tour contiendraient le numéro, ainsi que sa fréquence. Les clés du dictionnaire sont les mots du corpus et les valeurs associées sont des listes où le premier élément est l’id du document dans lequel le terme se trouve et le deuxième est sa fréquence dans ce document. La liste est à deux dimensions et peut contenir plusieurs documents avec les fréquences dans celui-ci. Exemple: {expect: [[1,2],[2,1]...] ).
+    • Index des documents (sous forme de dictionnaire, dans lequel le numéro sera associé au nom du fichier et au titre de l'article. La clé est l’id du document qui est généré automatiquement par le programme et la valeur est une liste avec le nom du fichier comme premier élément et le titre comme deuxième élément. ) ;
+
+Il faut préciser que les titres, du texte des documents, ainsi que les termes des dictionnaires font l’objet d’un prétraitement : lemmatisation, tokenisation, désaccentuation, suppression des mots vides, mise en minuscule. Dans la seconde partie, nous avons réalisé un gestionnaire bilingue de requêtes booléennes utilisant l’index du corpus généré.
+
+PARTIE PRINCIPALE
+
+INDEXATION
+Dans cette partie nous allons vous présenter plus en détails les lignes du code, ses fonctions pour effectuer ce projet, ainsi que les fichiers d’entrée et de sortie.
+
+Pour la première partie, le script qui s’appelle indexerDocuments.py possède deux fichiers à exécuter:
+    • Pour la création de l’index inversé (qui crée un document sous format json qui s’appelle indexTermes) ;
+    • Pour la création de l’index des documents (qui crée un document aussi sous format json et qui s’appelle indexDocs).
+
+Ces deux fichiers vont apparaitre dans le même dossier que le script. Pour lancer la commande, python3 indexer.py chemin vers le corpus. Exemple :
+ /home/maryna/Bureau/projet_stuck/corpus/initiaux/
+ou
+python3 indexerDocuments.py /home/maryna/Bureau/projet_stuck/corpus/complémentaires/
+
+Grace à cette commande le code prend cette ligne en entrée, en faisant l’indexation : il parcourt chaque document du dossier (initiaux ou complémentaires), il récupère le nom du fichier avec le titre. Après cela le code crée un dictionnaire avec la clé index du document, en ajoutant 1 à chaque prochain document et la valeur en mode liste : le nom du document(sans la partie .txt), suivi du titre de l’article.
+
+Le dictionnaire créé est incrémental. Si nous voulons ajouter un nouveau document à indexer, il exécutera sans toucher les clés et valeurs qui ont été déjà créé.  Mais si le titre qu’on veut ajouter existe déjà dans notre dictionnaire, alors il n’ajoutera rien.
+
+En parallèle, nous créons un index inversé. Le code prend l’article et il en extrait le texte grâce à l’import des outils suivants : BeautyfullSoup et lxml.  Après le traitement qui a été mentionné ci-dessus, nous recevons la liste des mots pertinents (les mots pleins). 
+
+Les outils que nous utilisons pour le prétraitement sont TreeTagger pour le français et l’anglais, ainsi que treetaggerwrapper qui permet d’appeler TreeTagger par Python. Avant d’appliquer le TreeTagger sur le texte on détecte la langue avec langue.detect()
+
+Afin que notre programme traite uniquement les mots pleins,  nous observons la deuxième colonne du résultat obtenu via Treetagger et s’il s’agit un adjectif, d’un nom, d’un adverbe ou d’une abréviation, alors nous regardons la troisième colonne et en récupérons le contenu.
+
+Nous envoyons cet extract à ‘counter’ qui par la suite génère un dictionnaire où le mot est une clé et sa fréquence est la valeur. Ces résultats sont enregistrés dans un document nommé indexDocs sous format .json.
+
+Si le mot n’existe pas, alors le code l’ajoute dans le dictionnaire, mais si le mot existe déjà, alors nous ajoutons l’id du nouveau document et sa fréquence dans celui-ci.
+
+Enfin, le document aura en clé le mot et en valeur la liste des listes dans lequel le 1er élément est le numéro(ID) du document et puis sa fréquence dans ce même document.
+
+REQUETE
+Pour calculer le score de pertinence, nous avons choisi la fréquence absolue de tous les termes qui se trouvent dans la requête. Selon nous, il s’agit d’un indicateur bon et pragmatique de l’importance des termes dans chaque document. 
+
+Il est important de préciser que, dans la requête, nous sommes obligés d’avoir un mot obligatoire ou facultatif. En effet, il est impossible d’exécuter la requête uniquement avec les négations.
+
+Pour cesser la requête :STOPPROG.
+Les exemples de la requête ainsi que l’index calculé peuvent être récupérés dans le fichier log.txt qui se crée et se met à jour de la façon automatique après chaque requête.
+
+CONCLUSION
+Grace à ce projet nous avons pu expérimenter l’indexation des documents, et mieux appréhender la notion d’index inversé. De plus, nous avons réussi à faire une requête pour chercher un ou des termes dans les documents.
+
+FICHIERS PROGRAMME:
+indexerDocuments.py
+module : indexreq.py
+requeteDocuments.py
+FICHIERS EN ENTREE:
+corpus (initiaux et complémentaires)
+
+ELEMENTS EN SORTIE :
+indexTerme.json
+indexDocs.json
+log.txt
+dossier DocumentsIndexes (le dossier contient les documents indexés)
+  
