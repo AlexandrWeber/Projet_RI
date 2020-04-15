@@ -1,0 +1,52 @@
+Le programme est en cours d'exécution
+
+Nouvelle requête
+Termes: +dividend -economy
+
+Nouvelle requête
+Termes: +dividend -money
+
+Nouvelle requête
+Termes: +expect -good
+titre du document: WHY THE LEFT IS ISRAEL'S ONLY HOPE FOR PEACE 
+index calculé: 1
+
+Nouvelle requête
+Termes: +expect money
+titre du document: THE PRICE OF EU ACCESSION
+index calculé: 3
+titre du document: END OF THE NEW WORKPLACE 
+index calculé: 2
+titre du document: AMERICAN BURBS 
+index calculé: 1
+titre du document: THREATS TO DISARMAMENT AND INTERNATIONAL SECURITY
+index calculé: 1
+titre du document: WHY THE LEFT IS ISRAEL'S ONLY HOPE FOR PEACE 
+index calculé: 1
+titre du document: AFRICA : EXTERNAL INTEREST AND INTERNAL INSECURITY 
+index calculé: 1
+
+Nouvelle requête
+Termes: +écoNomie -bien
+titre du document: LES IMPASSES D'UN MODÈLE
+index calculé: 9
+titre du document: CADRES ET EMPLOYÉS COMMUNIENT DANS LA « RELIGION » DU TRAVAIL
+index calculé: 4
+titre du document: DROIT DES BREVETS OU DROIT À LA SANTÉ
+index calculé: 4
+titre du document: PARADOXES D'UN SCRUTIN
+index calculé: 2
+titre du document: À QUAND LA TRANSPARENCE DANS LES MÉDIAS
+index calculé: 1
+titre du document: UNE PRIORITÉ GÉOSTRATÉGIQUE
+index calculé: 1
+
+Nouvelle requête
+Termes: +bien argent
+titre du document: AU SEUIL D'UNE ADHÉSION COÛTEUSE
+index calculé: 1
+titre du document: PARADIS DE BANLIEUE, VERSION AMÉRICAINE
+index calculé: 1
+titre du document: De la guerre perpétuelle
+index calculé: 1
+Le programme est arrêté
